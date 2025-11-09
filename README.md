@@ -1,7 +1,5 @@
 # Attractiveness Regression - Simplified Repository
 
-This is a simplified version of the original `cs559hw_5pro` repository, restructured into three main Python files while preserving all functionality.
-
 ## Repository Structure
 
 ```
@@ -188,26 +186,6 @@ runs/20241109_013000__baseline/
     └── failure_examples.png      # Worst predictions
 ```
 
-## Key Features Preserved
-
-All functionality from the original repository is preserved:
-
-✅ **Data loading**: Identical dataset loading and splitting logic  
-✅ **Model architecture**: Same CNN architecture with configurable blocks  
-✅ **Training**: Same training loop with callbacks  
-✅ **Metrics**: Custom RoundingMAE metric  
-✅ **Visualization**: Training history plots and qualitative examples  
-✅ **Reproducibility**: Deterministic training with seed setting  
-✅ **Configuration**: YAML-based configuration with CLI overrides  
-✅ **Augmentation**: Random flip, brightness, and contrast  
-
-## Differences from Original
-
-- **Simplified structure**: 3 files instead of complex directory hierarchy
-- **No separate utilities**: All utilities are integrated into the main files
-- **No CLI for dataset splitting**: Use the config file instead
-- **No experiment sweeps**: Focus on single experiment runs
-- **No separate reporting tools**: Metrics and plots are generated during training
 
 ## Example Workflow
 
@@ -243,6 +221,3 @@ All functionality from the original repository is preserved:
 - TensorFlow 2.12+
 - See `requirements.txt` for complete list
 
-## License
-
-Same as the original repository.
