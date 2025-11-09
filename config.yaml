@@ -1,0 +1,55 @@
+experiment:
+  name: baseline
+  seed: 42
+
+output:
+  runs_dir: runs
+
+data:
+  root_dir: ./data  # Should contain training/, validation/, and test/ subfolders
+  image_size: [80, 80]
+  color_mode: rgb
+  cache: true
+  shuffle_buffer: 2048
+  num_parallel_calls: 4
+  augment:
+    random_flip: true
+    random_brightness: 0.08
+    random_contrast: 0.08
+
+model:
+  initializer: xavier    # xavier | gaussian
+  gaussian_stddev: 0.02
+  use_batch_norm: true
+  l2_weight: 0.0001
+  dropout_rate: 0.3
+  architecture:
+    activation: relu
+    conv_blocks:
+      - {filters: 32, kernel_size: 3, pool: 2}
+      - {filters: 64, kernel_size: 3, pool: 2}
+      - {filters: 128, kernel_size: 3, pool: 2}
+    dense_units: [128, 64]
+
+training:
+  loss: mse              # mse | mae | huber
+  epochs: 50
+  batch_size: 64
+  optimizer:
+    name: adam
+    learning_rate: 0.001
+    beta_1: 0.9
+    beta_2: 0.999
+    epsilon: 1.0e-7
+  early_stopping:
+    enabled: true
+    monitor: val_mae_rounded
+    patience: 8
+    mode: min
+  checkpoint:
+    save_best_only: true
+    monitor: val_mae_rounded
+
+runtime:
+  mixed_precision: float32   # float32 | mixed_float16 (use mixed_float16 for faster GPU training)
+  gpu_id: null               # null (use all GPUs) | 0, 1, 2... (use specific GPU)

@@ -1,0 +1,89 @@
+# Experiments Configuration File
+# This file defines multiple experiments to run in sequence
+
+# Base configuration file to use as starting point
+base_config: config.yaml
+
+# List of experiments to run
+experiments:
+  # Experiment 1: Baseline
+  - name: baseline
+    config:
+      experiment:
+        seed: 42
+      training:
+        epochs: 50
+
+  # Experiment 2: Higher dropout
+  - name: high_dropout
+    config:
+      experiment:
+        seed: 42
+      model:
+        dropout_rate: 0.5
+      training:
+        epochs: 50
+
+  # Experiment 3: Lower dropout
+  - name: low_dropout
+    config:
+      experiment:
+        seed: 42
+      model:
+        dropout_rate: 0.2
+      training:
+        epochs: 50
+
+  # Experiment 4: More convolutional layers
+  - name: deeper_cnn
+    config:
+      experiment:
+        seed: 42
+      model:
+        architecture:
+          conv_blocks:
+            - {filters: 32, kernel_size: 3, pool: 2}
+            - {filters: 64, kernel_size: 3, pool: 2}
+            - {filters: 128, kernel_size: 3, pool: 2}
+            - {filters: 256, kernel_size: 3, pool: 2}
+          dense_units: [256, 128]
+      training:
+        epochs: 50
+
+  # Experiment 5: Different optimizer learning rate
+  - name: higher_lr
+    config:
+      experiment:
+        seed: 42
+      training:
+        optimizer:
+          learning_rate: 0.005
+        epochs: 50
+
+  # Experiment 6: MAE loss instead of MSE
+  - name: mae_loss
+    config:
+      experiment:
+        seed: 42
+      training:
+        loss: mae
+        epochs: 50
+
+  # Experiment 7: Larger batch size
+  - name: large_batch
+    config:
+      experiment:
+        seed: 42
+      training:
+        batch_size: 128
+        epochs: 50
+
+  # Experiment 8: Mixed precision training (faster on GPU)
+  - name: mixed_precision
+    config:
+      experiment:
+        seed: 42
+      runtime:
+        mixed_precision: mixed_float16
+      training:
+        epochs: 50
